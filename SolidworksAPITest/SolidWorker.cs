@@ -16,5 +16,10 @@ namespace SolidworksAPITest
         {
             swModel.ForceRebuild3(false);
         }
+
+        public void Setsize(float x, float y,  float z)
+        {
+            swModel.Parameter("Width@Sketch1").Value;
+        }
     }
 }

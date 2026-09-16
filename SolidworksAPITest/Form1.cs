@@ -19,6 +19,18 @@ namespace SolidworksAPITest
 
         private void button1_Click(object sender, EventArgs e)
         {
+            int x, y, z = 0;
+            try
+            {
+                x = Convert.ToInt32(textBox1.Text);
+                y = Convert.ToInt32(textBox2.Text);
+                z = Convert.ToInt32(textBox3.Text);
+            }
+            catch
+            {
+                Console.WriteLine("textinput is not a number");
+            }
+            SolidWorker.SetSize(x,y,z);
             SolidWorker.UpdateModel();
         }
     }
