@@ -28,52 +28,57 @@
         /// </summary>
         private void InitializeComponent()
         {
-            button1 = new Button();
+            btnUpdate = new Button();
             textBox1 = new TextBox();
             textBox2 = new TextBox();
             textBox3 = new TextBox();
             SuspendLayout();
             // 
-            // button1
+            // btnUpdate
             // 
-            button1.Location = new Point(381, 182);
-            button1.Name = "button1";
-            button1.Size = new Size(119, 81);
-            button1.TabIndex = 0;
-            button1.Text = "Update";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            btnUpdate.Location = new Point(435, 243);
+            btnUpdate.Margin = new Padding(3, 4, 3, 4);
+            btnUpdate.Name = "btnUpdate";
+            btnUpdate.Size = new Size(136, 108);
+            btnUpdate.TabIndex = 0;
+            btnUpdate.Text = "Update";
+            btnUpdate.UseVisualStyleBackColor = true;
+            btnUpdate.Click += btnUpdate_Click;
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(250, 182);
+            textBox1.Location = new Point(286, 243);
+            textBox1.Margin = new Padding(3, 4, 3, 4);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(100, 23);
+            textBox1.Size = new Size(114, 27);
             textBox1.TabIndex = 1;
             // 
             // textBox2
             // 
-            textBox2.Location = new Point(250, 211);
+            textBox2.Location = new Point(286, 281);
+            textBox2.Margin = new Padding(3, 4, 3, 4);
             textBox2.Name = "textBox2";
-            textBox2.Size = new Size(100, 23);
+            textBox2.Size = new Size(114, 27);
             textBox2.TabIndex = 2;
             // 
             // textBox3
             // 
-            textBox3.Location = new Point(250, 240);
+            textBox3.Location = new Point(286, 320);
+            textBox3.Margin = new Padding(3, 4, 3, 4);
             textBox3.Name = "textBox3";
-            textBox3.Size = new Size(100, 23);
+            textBox3.Size = new Size(114, 27);
             textBox3.TabIndex = 3;
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(914, 600);
             Controls.Add(textBox3);
             Controls.Add(textBox2);
             Controls.Add(textBox1);
-            Controls.Add(button1);
+            Controls.Add(btnUpdate);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "Form1";
             Text = "Form1";
             Load += Form1_Load;
@@ -83,7 +88,7 @@
 
         #endregion
 
-        private Button button1;
+        private Button btnUpdate;
         private TextBox textBox1;
         private TextBox textBox2;
         private TextBox textBox3;

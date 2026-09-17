@@ -5,11 +5,11 @@ namespace SolidworksAPITest
 {
     public partial class Form1 : Form
     {
-        SolidWorker SolidWorker;
+        SolidWorker solidWorker;
         public Form1()
         {
             InitializeComponent();
-            SolidWorker = new SolidWorker();
+            solidWorker = new SolidWorker();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -17,22 +17,23 @@ namespace SolidworksAPITest
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnUpdate_Click(object sender, EventArgs e)
         {
-            int x, y, z = 0;
             try
             {
-                x = Convert.ToInt32(textBox1.Text);
-                y = Convert.ToInt32(textBox2.Text);
-                z = Convert.ToInt32(textBox3.Text);
-                //SolidWorker.SetSize(x,y,z);
+                if (solidWorker == null)
+                    solidWorker = new SolidWorker();
+
+                solidWorker.CreateCube(100);   // 100 mm cube
             }
-            catch
+            catch (Exception ex)
             {
-                Console.WriteLine("textinput is not a number");
+                MessageBox.Show(
+                    ex.Message,
+                    "SolidWorks error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
-            
-            SolidWorker.UpdateModel();
         }
     }
 }
