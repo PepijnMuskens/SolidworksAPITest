@@ -25,12 +25,13 @@ namespace SolidworksAPITest
                 x = Convert.ToInt32(textBox1.Text);
                 y = Convert.ToInt32(textBox2.Text);
                 z = Convert.ToInt32(textBox3.Text);
+                //SolidWorker.SetSize(x,y,z);
             }
             catch
             {
                 Console.WriteLine("textinput is not a number");
             }
-            SolidWorker.SetSize(x,y,z);
+            
             SolidWorker.UpdateModel();
         }
     }

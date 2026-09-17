@@ -19,7 +19,7 @@ namespace SolidworksAPITest
 
         public void Setsize(float x, float y,  float z)
         {
-            swModel.Parameter("Width@Sketch1").Value;
+            //swModel.Parameter("Width@Sketch1").Value;
         }
     }
 }
