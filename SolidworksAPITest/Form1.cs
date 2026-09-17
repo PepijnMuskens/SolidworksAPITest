@@ -31,8 +31,30 @@ namespace SolidworksAPITest
             {
                 Console.WriteLine("textinput is not a number");
             }
-            
             SolidWorker.UpdateModel();
+            SolidWorker.CreateCube();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                double a = Convert.ToDouble(textBoxCreateTussenplaatBovenA.Text);
+                double b = Convert.ToDouble(textBoxCreateTussenplaatBovenB.Text);
+                double c = Convert.ToDouble(textBoxCreateTussenplaatBovenC.Text);
+                double d = Convert.ToDouble(textBoxCreateTussenplaatBovenD.Text);
+                SolidWorker.CreateTussenplaatBoven(a,b,c,d);
+            }
+            catch
+            {
+                Console.WriteLine("textinput is not a number");
+            }
+            
+        }
+
+        private void textBoxCreateTussenplaatBovenA_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
