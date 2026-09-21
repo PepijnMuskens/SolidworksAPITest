@@ -1,6 +1,9 @@
-﻿using System;
-using SolidWorks.Interop.sldworks;
+﻿using SolidWorks.Interop.sldworks;
 using SolidWorks.Interop.swconst;
+using System;
+using System.Security.Cryptography.X509Certificates;
+using static System.ComponentModel.Design.ObjectSelectorEditor;
+
 
 namespace SolidworksAPITest
 {
@@ -8,6 +11,8 @@ namespace SolidworksAPITest
     {
         private readonly SldWorks swApp;
         private ModelDoc2 swModel;
+        private SolidWorkerHelper helper = new SolidWorkerHelper();
+
 
         public SolidWorker()
         {
@@ -223,6 +228,29 @@ namespace SolidworksAPITest
                 0.0,    
                 false
             );
+        }
+
+        // HoH in mm's
+        public void ModifyDeksloof(double HoH_1 = 1900.0, double HoH_2 = 2000.0, double HoH_3 = 1800.0)
+        {
+            double plateLengthMm = ((HoH_1 * 0.5 + HoH_2 + HoH_3 * 0.5) - 20) / 1000.0;
+
+            swModel.ClearSelection2(true);
+
+            swModel.Extension.SelectByID2("TussenplaatBoven", "SKETCH", 0, 0, 0, false, 0, null, 0);
+
+            Feature extrudeFeature = helper.SimpleExtrudeBoss(swModel, plateLengthMm);
+
+            swModel.ClearSelection2(true);
+
+            swModel.Extension.SelectByID2(
+                "",
+                "FACE",
+                0.0, 330.0/1000.0, 0.0,
+                false,
+                0,
+                null,
+                0);
         }
     }
 }

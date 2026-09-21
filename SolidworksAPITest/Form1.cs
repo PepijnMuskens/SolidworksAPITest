@@ -25,7 +25,7 @@ namespace SolidworksAPITest
                     solidWorker = new SolidWorker();
 
                 //solidWorker.CreateCube(100);   // 100 mm cube
-                solidWorker.CreatePlate();
+                solidWorker.ModifyDeksloof();
             }
             catch (Exception ex)
             {
