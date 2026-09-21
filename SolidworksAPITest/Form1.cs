@@ -24,7 +24,8 @@ namespace SolidworksAPITest
                 if (solidWorker == null)
                     solidWorker = new SolidWorker();
 
-                solidWorker.CreateCube(100);   // 100 mm cube
+                //solidWorker.CreateCube(100);   // 100 mm cube
+                solidWorker.CreatePlate();
             }
             catch (Exception ex)
             {
