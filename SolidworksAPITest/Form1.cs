@@ -43,18 +43,29 @@ namespace SolidworksAPITest
                 double b = Convert.ToDouble(textBoxCreateTussenplaatBovenB.Text);
                 double c = Convert.ToDouble(textBoxCreateTussenplaatBovenC.Text);
                 double d = Convert.ToDouble(textBoxCreateTussenplaatBovenD.Text);
-                SolidWorker.CreateTussenplaatBoven(a,b,c,d);
+                SolidWorker.CreateTussenplaatBoven(a, b, c, d);
             }
             catch
             {
                 Console.WriteLine("textinput is not a number");
             }
-            
+
         }
 
         private void textBoxCreateTussenplaatBovenA_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Dictionary<string, double> measurements = new Dictionary<string, double>();
+            measurements.Add("A", 50);
+            measurements.Add("B", 5);
+            measurements.Add("C", 3.5);
+            measurements.Add("D", 3.5);
+
+            SolidWorker.UpdateEquations(measurements);
         }
     }
 }

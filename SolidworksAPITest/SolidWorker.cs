@@ -7,11 +7,13 @@ namespace SolidworksAPITest
     {
         SldWorks swApp;
         ModelDoc2 swModel;
+        EquationMgr swEquationMgr;
         SketchManager sketchManager;
         public SolidWorker()
         {
             swApp = SolidWorksSingleton.GetApplication();
             swModel = (ModelDoc2)swApp.ActiveDoc;
+            swEquationMgr = swModel.GetEquationMgr();
             sketchManager = swModel.SketchManager;
         }
         public void UpdateModel()
@@ -19,7 +21,7 @@ namespace SolidworksAPITest
             swModel.ForceRebuild3(false);
         }
 
-        public void Setsize(float x, float y,  float z)
+        public void Setsize(float x, float y, float z)
         {
             //swModel.Parameter("Width@Sketch1").Value;
         }
@@ -28,8 +30,8 @@ namespace SolidworksAPITest
         {
             sketchManager.InsertSketch(true);
 
-            sketchManager.CreateCenterRectangle(0,0,0,1,1,1);
-            
+            sketchManager.CreateCenterRectangle(0, 0, 0, 1, 1, 1);
+
         }
 
         public void CreateCube(double sizeMm = 100.0)
@@ -53,10 +55,41 @@ namespace SolidworksAPITest
 
         public void CreateTussenplaatBoven(double a, double b, double c, double d)
         {
+            //Get refrence to part to 2d sketch templates
             swModel.Extension.SelectByID2("TussenplaatBoven", "SKETCH", 0, 0, 0, false, 0, null, 0);
 
-            swModel.FeatureManager.FeatureExtrusion3(true, false, false, (int)swEndConditions_e.swEndCondBlind, (int)swEndConditions_e.swEndCondBlind, a, 0.0, false, false, false, false, 0.0, 0.0, false, false, false, false, true, true, true, (int)swStartConditions_e.swStartSketchPlane, 0.0, false);
+            //Extrude piece to plate length
+            Feature extrude = swModel.FeatureManager.FeatureExtrusion3(true, false, false, (int)swEndConditions_e.swEndCondBlind, (int)swEndConditions_e.swEndCondBlind, a, 0.0, false, false, false, false, 0.0, 0.0, false, false, false, false, true, true, false, (int)swStartConditions_e.swStartSketchPlane, 0.0, false);
+
 
         }
+
+        public void UpdateEquations(Dictionary<string,double> measurements)
+        {
+            if (swEquationMgr == null)
+            {
+                Console.WriteLine("Failed to get the equation manager");
+                return;
+            }
+                
+            string value = swEquationMgr.Value[0].ToString();
+            for(int i = 0; i < swEquationMgr.GetCount(); i++)
+            {
+                if (swEquationMgr.GlobalVariable[i])
+                {
+                    string[] equation = swEquationMgr.Equation[i].Split("\"");
+                    if (measurements.Keys.Contains(equation[1]) ){
+                        //replace value with new value
+                        string valueString = equation[3].Split(" ")[1];
+                        swEquationMgr.Equation[i].Replace(swEquationMgr.Value[i].ToString(), measurements[equation[1]].ToString());
+                    }
+                }
+            }
+            
+
+
+
+        }
+
     }
 }

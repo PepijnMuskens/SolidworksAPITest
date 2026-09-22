@@ -37,6 +37,7 @@
             textBoxCreateTussenplaatBovenB = new TextBox();
             textBoxCreateTussenplaatBovenC = new TextBox();
             textBoxCreateTussenplaatBovenD = new TextBox();
+            button3 = new Button();
             SuspendLayout();
             // 
             // button1
@@ -72,7 +73,7 @@
             // 
             // button2
             // 
-            button2.Location = new Point(634, 65);
+            button2.Location = new Point(629, 65);
             button2.Name = "button2";
             button2.Size = new Size(119, 118);
             button2.TabIndex = 4;
@@ -109,11 +110,22 @@
             textBoxCreateTussenplaatBovenD.Size = new Size(100, 25);
             textBoxCreateTussenplaatBovenD.TabIndex = 8;
             // 
+            // button3
+            // 
+            button3.Location = new Point(629, 360);
+            button3.Name = "button3";
+            button3.Size = new Size(119, 60);
+            button3.TabIndex = 9;
+            button3.Text = "Edit Equations";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 510);
+            Controls.Add(button3);
             Controls.Add(textBoxCreateTussenplaatBovenD);
             Controls.Add(textBoxCreateTussenplaatBovenC);
             Controls.Add(textBoxCreateTussenplaatBovenB);
@@ -141,5 +153,6 @@
         private TextBox textBoxCreateTussenplaatBovenB;
         private TextBox textBoxCreateTussenplaatBovenC;
         private TextBox textBoxCreateTussenplaatBovenD;
+        private Button button3;
     }
 }
