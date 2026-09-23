@@ -13,7 +13,7 @@ namespace SolidworksAPITest
             Feature feature = swModel.FeatureManager.FeatureExtrusion3(
                 true,
                 false,
-                false,
+                true,
                 (int)swEndConditions_e.swEndCondBlind,
                 (int)swEndConditions_e.swEndCondBlind,
                 lengthMm,

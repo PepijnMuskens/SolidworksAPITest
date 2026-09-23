@@ -241,16 +241,42 @@ namespace SolidworksAPITest
 
             Feature extrudeFeature = helper.SimpleExtrudeBoss(swModel, plateLengthMm);
 
-            swModel.ClearSelection2(true);
+            PenetrateTopOfDeksloof(extrudeFeature);
+        }
 
-            swModel.Extension.SelectByID2(
-                "",
-                "FACE",
-                0.0, 330.0/1000.0, 0.0,
-                false,
-                0,
-                null,
-                0);
+        public void PenetrateTopOfDeksloof(Feature deksloofFeature)
+        {
+            SketchManager skMgr = swModel.SketchManager;
+
+            // Select top surface
+            Face2 topFace = null;
+            double largestArea = 0.0;
+
+            object[] faces = (object[])deksloofFeature.GetFaces();
+
+            foreach(Face2 face in faces)
+            {
+                Surface surface = (Surface)face.GetSurface();
+
+                if (surface.IsPlane())
+                {
+                    double area = face.GetArea();
+
+                    if (area > largestArea)
+                    {
+                        largestArea = area;
+                        topFace = face;
+                    }
+                }
+            }
+
+            if (topFace != null)
+            {
+                IEntity entity = (IEntity)topFace;
+
+                entity.Select4(false, null);
+                skMgr.InsertSketch(true);
+            }
         }
     }
 }
