@@ -241,10 +241,10 @@ namespace SolidworksAPITest
 
             Feature extrudeFeature = helper.SimpleExtrudeBoss(swModel, plateLengthMm);
 
-            PenetrateTopOfDeksloof(extrudeFeature);
+            PenetrateTopOfDeksloof(extrudeFeature, plateLengthMm);
         }
 
-        public void PenetrateTopOfDeksloof(Feature deksloofFeature)
+        public void PenetrateTopOfDeksloof(Feature deksloofFeature, double plateLengthMm)
         {
             SketchManager skMgr = swModel.SketchManager;
 
@@ -270,13 +270,43 @@ namespace SolidworksAPITest
                 }
             }
 
-            if (topFace != null)
-            {
-                IEntity entity = (IEntity)topFace;
+            if (topFace == null)
+                return;
 
-                entity.Select4(false, null);
-                skMgr.InsertSketch(true);
+            
+            IEntity entity = (IEntity)topFace;
+
+            entity.Select4(false, null);
+            skMgr.InsertSketch(true);
+
+            object[] edges = (object[])topFace.GetEdges();
+
+            foreach (object edgeObj in edges)
+            {
+                IEdge edge = (IEdge)edgeObj;
+                IEntity edgeEntity = (IEntity)edge;
+
+                edgeEntity.Select4(true, null);
             }
+
+            skMgr.SketchUseEdge3(false, true);
+
+            double width = 496.0 / 1000.0;
+            double height = plateLengthMm;
+            double holeEdgeDistance = 34.0 / 1000.0;
+            double holeRadius = 10.0 / 1000.0;
+
+            skMgr.CreateCornerRectangle(width, height, 0, 0, 0, 0);
+
+
+
+            //skMgr.CreateCircle(
+            //    width - holeEdgeDistance,
+            //    height - holeEdgeDistance,
+            //    0,
+            //    width - holeEdgeDistance + holeRadius,
+            //    height - holeEdgeDistance,
+            //    0);
         }
     }
 }

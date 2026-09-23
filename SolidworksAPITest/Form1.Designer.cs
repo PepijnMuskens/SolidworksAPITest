@@ -2,95 +2,120 @@
 {
     partial class Form1
     {
-        /// <summary>
-        ///  Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        ///  Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
             {
                 components.Dispose();
             }
+
             base.Dispose(disposing);
         }
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        ///  Required method for Designer support - do not modify
-        ///  the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
-            btnUpdate = new Button();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
-            textBox3 = new TextBox();
-            SuspendLayout();
+            this.btnOpenFile = new System.Windows.Forms.Button();
+            this.btnUpdate = new System.Windows.Forms.Button();
+            this.dataGridViewDrawingValues = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDrawingValues)).BeginInit();
+            this.SuspendLayout();
+
+            // 
+            // btnOpenFile
+            // 
+            this.btnOpenFile.Location = new System.Drawing.Point(20, 20);
+            this.btnOpenFile.Name = "btnOpenFile";
+            this.btnOpenFile.Size = new System.Drawing.Size(160, 40);
+            this.btnOpenFile.TabIndex = 0;
+            this.btnOpenFile.Text = "Open TXT File";
+            this.btnOpenFile.UseVisualStyleBackColor = true;
+            this.btnOpenFile.Click += new System.EventHandler(this.btnOpenFile_Click);
+
             // 
             // btnUpdate
             // 
-            btnUpdate.Location = new Point(435, 243);
-            btnUpdate.Margin = new Padding(3, 4, 3, 4);
-            btnUpdate.Name = "btnUpdate";
-            btnUpdate.Size = new Size(136, 108);
-            btnUpdate.TabIndex = 0;
-            btnUpdate.Text = "Update";
-            btnUpdate.UseVisualStyleBackColor = true;
-            btnUpdate.Click += btnUpdate_Click;
+            this.btnUpdate.Location = new System.Drawing.Point(195, 20);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(160, 40);
+            this.btnUpdate.TabIndex = 1;
+            this.btnUpdate.Text = "Update";
+            this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+
             // 
-            // textBox1
+            // dataGridViewDrawingValues
             // 
-            textBox1.Location = new Point(286, 243);
-            textBox1.Margin = new Padding(3, 4, 3, 4);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(114, 27);
-            textBox1.TabIndex = 1;
-            // 
-            // textBox2
-            // 
-            textBox2.Location = new Point(286, 281);
-            textBox2.Margin = new Padding(3, 4, 3, 4);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(114, 27);
-            textBox2.TabIndex = 2;
-            // 
-            // textBox3
-            // 
-            textBox3.Location = new Point(286, 320);
-            textBox3.Margin = new Padding(3, 4, 3, 4);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(114, 27);
-            textBox3.TabIndex = 3;
+            this.dataGridViewDrawingValues.AllowUserToAddRows = false;
+            this.dataGridViewDrawingValues.AllowUserToDeleteRows = false;
+            this.dataGridViewDrawingValues.Anchor =
+                ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top |
+                System.Windows.Forms.AnchorStyles.Bottom) |
+                System.Windows.Forms.AnchorStyles.Left) |
+                System.Windows.Forms.AnchorStyles.Right)));
+
+            this.dataGridViewDrawingValues.AutoSizeColumnsMode =
+                System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+
+            this.dataGridViewDrawingValues.ColumnHeadersHeightSizeMode =
+                System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+
+            this.dataGridViewDrawingValues.Location =
+                new System.Drawing.Point(20, 80);
+
+            this.dataGridViewDrawingValues.Name =
+                "dataGridViewDrawingValues";
+
+            this.dataGridViewDrawingValues.ReadOnly = true;
+
+            this.dataGridViewDrawingValues.RowHeadersWidth = 51;
+
+            this.dataGridViewDrawingValues.SelectionMode =
+                System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+
+            this.dataGridViewDrawingValues.Size =
+                new System.Drawing.Size(940, 400);
+
+            this.dataGridViewDrawingValues.TabIndex = 2;
+
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(914, 600);
-            Controls.Add(textBox3);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
-            Controls.Add(btnUpdate);
-            Margin = new Padding(3, 4, 3, 4);
-            Name = "Form1";
-            Text = "Form1";
-            Load += Form1_Load;
-            ResumeLayout(false);
-            PerformLayout();
+            this.AutoScaleDimensions =
+                new System.Drawing.SizeF(7F, 15F);
+
+            this.AutoScaleMode =
+                System.Windows.Forms.AutoScaleMode.Font;
+
+            this.ClientSize =
+                new System.Drawing.Size(980, 510);
+
+            this.Controls.Add(this.dataGridViewDrawingValues);
+            this.Controls.Add(this.btnUpdate);
+            this.Controls.Add(this.btnOpenFile);
+
+            this.MinimumSize =
+                new System.Drawing.Size(700, 400);
+
+            this.Name = "Form1";
+            this.Text = "SolidWorks Deksloof Calculator";
+
+            this.Load +=
+                new System.EventHandler(this.Form1_Load);
+
+            ((System.ComponentModel.ISupportInitialize)
+                (this.dataGridViewDrawingValues)).EndInit();
+
+            this.ResumeLayout(false);
         }
 
         #endregion
 
-        private Button btnUpdate;
-        private TextBox textBox1;
-        private TextBox textBox2;
-        private TextBox textBox3;
+        private System.Windows.Forms.Button btnOpenFile;
+        private System.Windows.Forms.Button btnUpdate;
+        private System.Windows.Forms.DataGridView dataGridViewDrawingValues;
     }
 }
