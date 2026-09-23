@@ -38,6 +38,15 @@
             textBoxCreateTussenplaatBovenC = new TextBox();
             textBoxCreateTussenplaatBovenD = new TextBox();
             button3 = new Button();
+            textBox4 = new TextBox();
+            label1 = new Label();
+            label2 = new Label();
+            textBox5 = new TextBox();
+            label3 = new Label();
+            textBox6 = new TextBox();
+            label4 = new Label();
+            textBox7 = new TextBox();
+            button4 = new Button();
             SuspendLayout();
             // 
             // button1
@@ -120,11 +129,94 @@
             button3.UseVisualStyleBackColor = true;
             button3.Click += button3_Click;
             // 
+            // textBox4
+            // 
+            textBox4.Location = new Point(484, 364);
+            textBox4.Name = "textBox4";
+            textBox4.Size = new Size(100, 25);
+            textBox4.TabIndex = 10;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(450, 367);
+            label1.Name = "label1";
+            label1.Size = new Size(16, 17);
+            label1.TabIndex = 11;
+            label1.Text = "A";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(450, 398);
+            label2.Name = "label2";
+            label2.Size = new Size(15, 17);
+            label2.TabIndex = 13;
+            label2.Text = "B";
+            // 
+            // textBox5
+            // 
+            textBox5.Location = new Point(484, 395);
+            textBox5.Name = "textBox5";
+            textBox5.Size = new Size(100, 25);
+            textBox5.TabIndex = 12;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(450, 429);
+            label3.Name = "label3";
+            label3.Size = new Size(16, 17);
+            label3.TabIndex = 15;
+            label3.Text = "C";
+            // 
+            // textBox6
+            // 
+            textBox6.Location = new Point(484, 426);
+            textBox6.Name = "textBox6";
+            textBox6.Size = new Size(100, 25);
+            textBox6.TabIndex = 14;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(450, 460);
+            label4.Name = "label4";
+            label4.Size = new Size(17, 17);
+            label4.TabIndex = 17;
+            label4.Text = "D";
+            // 
+            // textBox7
+            // 
+            textBox7.Location = new Point(484, 457);
+            textBox7.Name = "textBox7";
+            textBox7.Size = new Size(100, 25);
+            textBox7.TabIndex = 16;
+            // 
+            // button4
+            // 
+            button4.Location = new Point(629, 426);
+            button4.Name = "button4";
+            button4.Size = new Size(119, 60);
+            button4.TabIndex = 18;
+            button4.Text = "Save File";
+            button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 510);
+            Controls.Add(button4);
+            Controls.Add(label4);
+            Controls.Add(textBox7);
+            Controls.Add(label3);
+            Controls.Add(textBox6);
+            Controls.Add(label2);
+            Controls.Add(textBox5);
+            Controls.Add(label1);
+            Controls.Add(textBox4);
             Controls.Add(button3);
             Controls.Add(textBoxCreateTussenplaatBovenD);
             Controls.Add(textBoxCreateTussenplaatBovenC);
@@ -154,5 +246,14 @@
         private TextBox textBoxCreateTussenplaatBovenC;
         private TextBox textBoxCreateTussenplaatBovenD;
         private Button button3;
+        private TextBox textBox4;
+        private Label label1;
+        private Label label2;
+        private TextBox textBox5;
+        private Label label3;
+        private TextBox textBox6;
+        private Label label4;
+        private TextBox textBox7;
+        private Button button4;
     }
 }

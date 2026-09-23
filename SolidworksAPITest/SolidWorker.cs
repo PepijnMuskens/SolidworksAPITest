@@ -1,5 +1,6 @@
 ﻿using SolidWorks.Interop.sldworks;
 using SolidWorks.Interop.swconst;
+using System.Diagnostics.Metrics;
 
 namespace SolidworksAPITest
 {
@@ -7,12 +8,14 @@ namespace SolidworksAPITest
     {
         SldWorks swApp;
         ModelDoc2 swModel;
+        ModelDocExtension swModelExt;
         EquationMgr swEquationMgr;
         SketchManager sketchManager;
         public SolidWorker()
         {
             swApp = SolidWorksSingleton.GetApplication();
             swModel = (ModelDoc2)swApp.ActiveDoc;
+            swModelExt = swModel.Extension;
             swEquationMgr = swModel.GetEquationMgr();
             sketchManager = swModel.SketchManager;
         }
@@ -71,8 +74,7 @@ namespace SolidworksAPITest
                 Console.WriteLine("Failed to get the equation manager");
                 return;
             }
-                
-            string value = swEquationMgr.Value[0].ToString();
+             
             for(int i = 0; i < swEquationMgr.GetCount(); i++)
             {
                 if (swEquationMgr.GlobalVariable[i])
@@ -80,16 +82,28 @@ namespace SolidworksAPITest
                     string[] equation = swEquationMgr.Equation[i].Split("\"");
                     if (measurements.Keys.Contains(equation[1]) ){
                         //replace value with new value
-                        string valueString = equation[3].Split(" ")[1];
-                        swEquationMgr.Equation[i].Replace(swEquationMgr.Value[i].ToString(), measurements[equation[1]].ToString());
+                        string valueString = equation[2].Split("=")[1];
+                        string newString = swEquationMgr.Equation[i].Replace(valueString, measurements[equation[1]].ToString());
+                        long longEquation = 0;
+                        longEquation = swEquationMgr.SetEquationAndConfigurationOption(i, newString, (int)swInConfigurationOpts_e.swAllConfiguration, null);
+                            
                     }
                 }
+
             }
-            
-
-
-
+            UpdateModel();
         }
 
+        public void saveFile(string fileName)
+        {
+            AdvancedSaveAsOptions options = (AdvancedSaveAsOptions)swModelExt.GetAdvancedSaveAsOptions(7);
+            options.SaveAllAsCopy = true;
+            object ids;
+            object names;
+            object paths;
+
+            options.GetItemsNameAndPath(out ids,out names,out paths);
+            MessageBox.Show(ids + "\n" + names + "\n" + paths);
+        }
     }
 }

@@ -59,13 +59,23 @@ namespace SolidworksAPITest
 
         private void button3_Click(object sender, EventArgs e)
         {
+            double a = Convert.ToDouble(textBox4.Text);
+            double b = Convert.ToDouble(textBox5.Text);
+            double c = Convert.ToDouble(textBox6.Text);
+            double d = Convert.ToDouble(textBox7.Text);
+
             Dictionary<string, double> measurements = new Dictionary<string, double>();
-            measurements.Add("A", 50);
-            measurements.Add("B", 5);
-            measurements.Add("C", 3.5);
-            measurements.Add("D", 3.5);
+            measurements.Add("A", a);
+            measurements.Add("B", b);
+            measurements.Add("C", c);
+            measurements.Add("D", d);
 
             SolidWorker.UpdateEquations(measurements);
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            SolidWorker.saveFile("testpart");
         }
     }
 }
