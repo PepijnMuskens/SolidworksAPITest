@@ -1,31 +1,85 @@
 using SolidWorks.Interop.sldworks;
 using SolidWorks.Interop.swconst;
-using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
-using System.Windows.Forms;
 
 namespace SolidworksAPITest
 {
     public partial class Form1 : Form
     {
-        SolidWorker solidWorker;
-
+        SolidWorker SolidWorker;
         private DeksloofCalculator? deksloofCalculator;
-
         public Form1()
         {
             InitializeComponent();
-
-            solidWorker = new SolidWorker();
+            SolidWorker = new SolidWorker();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+
         }
 
-        private void btnOpenFile_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
+        {
+            int x, y, z = 0;
+            try
+            {
+                x = Convert.ToInt32(textBox1.Text);
+                y = Convert.ToInt32(textBox2.Text);
+                z = Convert.ToInt32(textBox3.Text);
+                //SolidWorker.SetSize(x,y,z);
+            }
+            catch
+            {
+                Console.WriteLine("textinput is not a number");
+            }
+            SolidWorker.UpdateModel();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                double a = Convert.ToDouble(textBoxCreateTussenplaatBovenA.Text);
+                double b = Convert.ToDouble(textBoxCreateTussenplaatBovenB.Text);
+                double c = Convert.ToDouble(textBoxCreateTussenplaatBovenC.Text);
+                double d = Convert.ToDouble(textBoxCreateTussenplaatBovenD.Text);
+                SolidWorker.CreateTussenplaatBoven(a, b, c, d);
+            }
+            catch
+            {
+                Console.WriteLine("textinput is not a number");
+            }
+
+        }
+
+        private void textBoxCreateTussenplaatBovenA_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            double a = Convert.ToDouble(textBox4.Text);
+            double b = Convert.ToDouble(textBox5.Text);
+            double c = Convert.ToDouble(textBox6.Text);
+            double d = Convert.ToDouble(textBox7.Text);
+
+            Dictionary<string, double> measurements = new Dictionary<string, double>();
+            measurements.Add("A", a);
+            measurements.Add("B", b);
+            measurements.Add("C", c);
+            measurements.Add("D", d);
+
+            SolidWorker.UpdateEquations(measurements);
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            SolidWorker.saveFile("testpart");
+        }
+
+        private void OpenFileBtn_Click(object sender, EventArgs e)
         {
             using OpenFileDialog dialog = new OpenFileDialog();
 
@@ -75,9 +129,8 @@ namespace SolidworksAPITest
             }
         }
 
-    
         private List<DeksloofCalculator.Point3D> LoadCoordinatesFromFile(
-            string filePath)
+           string filePath)
         {
             List<DeksloofCalculator.Point3D> coordinates = [];
 
@@ -141,12 +194,12 @@ namespace SolidworksAPITest
             return coordinates;
         }
 
-        private void btnUpdate_Click(object sender, EventArgs e)
+        private void UpdateBtn_Click(object sender, EventArgs e)
         {
             try
             {
-                if (solidWorker == null)
-                    solidWorker = new SolidWorker();
+                if (SolidWorker == null)
+                    SolidWorker = new SolidWorker();
 
                 if (deksloofCalculator == null)
                 {
