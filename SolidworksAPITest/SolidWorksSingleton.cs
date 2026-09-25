@@ -25,15 +25,16 @@ namespace SolidworksAPITest
                 try
                 {
                     NativeMethods.CLSIDFromProgIDEx(progId, out clsid);
+                    
                 }
                 catch
                 {
                     NativeMethods.CLSIDFromProgID(progId, out clsid);
                 }
-
                 NativeMethods.GetActiveObject(ref clsid, IntPtr.Zero, out var obj);
                 swApp = (SldWorks)obj;
                 swApp.Visible = true;
+
                 return swApp;
             }
             return swApp;
