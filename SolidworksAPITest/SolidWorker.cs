@@ -83,7 +83,8 @@ namespace SolidworksAPITest
                     if (measurements.Keys.Contains(equation[1]) ){
                         //replace value with new value
                         string valueString = equation[2].Split("=")[1];
-                        string newString = swEquationMgr.Equation[i].Replace(valueString, measurements[equation[1]].ToString());
+                        string newString = swEquationMgr.Equation[i].Replace(valueString, Math.Round(measurements[equation[1]],2).ToString());
+                        newString = newString.Replace(',', '.');
                         long longEquation = 0;
                         longEquation = swEquationMgr.SetEquationAndConfigurationOption(i, newString, (int)swInConfigurationOpts_e.swAllConfiguration, null);
                             

@@ -297,23 +297,48 @@ namespace SolidworksAPITest
 
         private void button5_Click(object sender, EventArgs e)
         {
+            try
+            {
+                double partnr = Convert.ToInt32(textBox8.Text);
+                Dictionary<string, double> measurements = new Dictionary<string, double>();
 
+                if (deksloofCalculator == null)
+                {
+                    MessageBox.Show(
+                        "Please load a TXT coordinate file first.",
+                        "No coordinate file",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
+
+                    return;
+                }
+                List<DeksloofCalculator.DrawingValues> values = deksloofCalculator.CalculateAllDrawingValues();
+
+                DeksloofCalculator.DrawingValues value = values.Find(r => r.DrawingNumber == partnr);
+                if (value != null)
+                {
+                    measurements.Add("A", value.A);
+                    measurements.Add("B", value.B);
+                    measurements.Add("C", value.C);
+                    measurements.Add("D", value.D);
+                    measurements.Add("E", value.E);
+                    measurements.Add("F", value.F);
+                    measurements.Add("G", value.G);
+                    measurements.Add("J", value.J);
+
+                    SolidWorker.UpdateEquations(measurements);
+                    SolidWorker.UpdateModel();
+                }
+            }
+            catch
+            {
+
+            }
         }
 
         private void textBox8_TextChanged(object sender, EventArgs e)
         {
-            double partnr = Convert.ToDouble(textBox4.Text);
-            Dictionary<string, double> measurements = new Dictionary<string, double>();
-            //    measurements.Add("A", a);
-            //    measurements.Add("B", b);
-            //    measurements.Add("C", c);
-            //    measurements.Add("D", d);
-            //    measurements.Add("D", d);
-
-            //    measurements.Add("D", d);
-            //    measurements.Add("D", d);
-            //    measurements.Add("D", d);
-            //
-        } 
+           
+        }
     }
 }
