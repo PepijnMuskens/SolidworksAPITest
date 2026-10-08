@@ -7,9 +7,9 @@ namespace SolidworksAPITest
     {
         public record Point3D(double X, double Y, double Z);
 
-        private readonly List<Point3D> coordinates;
+        private readonly IReadOnlyList<Point3D> coordinates;
 
-        public DeksloofCalculator(List<Point3D> coordinates)
+        public DeksloofCalculator(IReadOnlyList<Point3D> coordinates)
         {
             this.coordinates = coordinates;
         }

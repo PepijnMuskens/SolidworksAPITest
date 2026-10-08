@@ -12,16 +12,20 @@ namespace SolidworksAPITest
 
         private SolidWorksSingleton()
         {
-
         }
 
         internal static SldWorks GetApplication()
         {
+            // Already connected
+            if (swApp != null)
+                return swApp;
+
             Guid clsid;
             string progId = "Sldworks.Application";
 
-            if (swApp == null)
+            try
             {
+                // Try to get the CLSID
                 try
                 {
                     NativeMethods.CLSIDFromProgIDEx(progId, out clsid);
@@ -31,18 +35,61 @@ namespace SolidworksAPITest
                     NativeMethods.CLSIDFromProgID(progId, out clsid);
                 }
 
-                NativeMethods.GetActiveObject(ref clsid, IntPtr.Zero, out var obj);
+                // Try to connect to an already running SolidWorks instance
+                NativeMethods.GetActiveObject(
+                    ref clsid,
+                    IntPtr.Zero,
+                    out var obj
+                );
+
                 swApp = (SldWorks)obj;
                 swApp.Visible = true;
+
                 return swApp;
             }
-            return swApp;
+            catch (COMException ex)
+            {
+                Console.WriteLine(
+                    $"[WARNING] SolidWorks was not found or is not running. " +
+                    $"Continuing without SolidWorks. ({ex.Message})"
+                );
+
+                Debug.WriteLine(
+                    $"SolidWorks connection failed: {ex}"
+                );
+
+                swApp = null;
+                return null;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(
+                    $"[WARNING] Could not connect to SolidWorks. " +
+                    $"Continuing without SolidWorks. ({ex.Message})"
+                );
+
+                Debug.WriteLine(
+                    $"SolidWorks connection failed: {ex}"
+                );
+
+                swApp = null;
+                return null;
+            }
         }
 
         internal static void Dispose()
         {
             if (swApp != null)
             {
+                try
+                {
+                    Marshal.FinalReleaseComObject(swApp);
+                }
+                catch
+                {
+                    // Ignore cleanup errors
+                }
+
                 swApp = null;
             }
         }

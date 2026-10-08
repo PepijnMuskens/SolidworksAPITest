@@ -18,98 +18,78 @@
 
         private void InitializeComponent()
         {
-            this.btnOpenFile = new System.Windows.Forms.Button();
-            this.btnUpdate = new System.Windows.Forms.Button();
-            this.dataGridViewDrawingValues = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDrawingValues)).BeginInit();
-            this.SuspendLayout();
-
+            btnOpenFile = new Button();
+            btnUpdate = new Button();
+            dataGridViewDrawingValues = new DataGridView();
+            btnCompare = new Button();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewDrawingValues).BeginInit();
+            SuspendLayout();
             // 
             // btnOpenFile
             // 
-            this.btnOpenFile.Location = new System.Drawing.Point(20, 20);
-            this.btnOpenFile.Name = "btnOpenFile";
-            this.btnOpenFile.Size = new System.Drawing.Size(160, 40);
-            this.btnOpenFile.TabIndex = 0;
-            this.btnOpenFile.Text = "Open TXT File";
-            this.btnOpenFile.UseVisualStyleBackColor = true;
-            this.btnOpenFile.Click += new System.EventHandler(this.btnOpenFile_Click);
-
+            btnOpenFile.Location = new Point(23, 27);
+            btnOpenFile.Margin = new Padding(3, 4, 3, 4);
+            btnOpenFile.Name = "btnOpenFile";
+            btnOpenFile.Size = new Size(183, 53);
+            btnOpenFile.TabIndex = 0;
+            btnOpenFile.Text = "Open TXT File";
+            btnOpenFile.UseVisualStyleBackColor = true;
+            btnOpenFile.Click += btnOpenFile_Click;
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(195, 20);
-            this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(160, 40);
-            this.btnUpdate.TabIndex = 1;
-            this.btnUpdate.Text = "Update";
-            this.btnUpdate.UseVisualStyleBackColor = true;
-            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
-
+            btnUpdate.Location = new Point(223, 27);
+            btnUpdate.Margin = new Padding(3, 4, 3, 4);
+            btnUpdate.Name = "btnUpdate";
+            btnUpdate.Size = new Size(183, 53);
+            btnUpdate.TabIndex = 1;
+            btnUpdate.Text = "Update";
+            btnUpdate.UseVisualStyleBackColor = true;
+            btnUpdate.Click += btnUpdate_Click;
             // 
             // dataGridViewDrawingValues
             // 
-            this.dataGridViewDrawingValues.AllowUserToAddRows = false;
-            this.dataGridViewDrawingValues.AllowUserToDeleteRows = false;
-            this.dataGridViewDrawingValues.Anchor =
-                ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top |
-                System.Windows.Forms.AnchorStyles.Bottom) |
-                System.Windows.Forms.AnchorStyles.Left) |
-                System.Windows.Forms.AnchorStyles.Right)));
-
-            this.dataGridViewDrawingValues.AutoSizeColumnsMode =
-                System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-
-            this.dataGridViewDrawingValues.ColumnHeadersHeightSizeMode =
-                System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-
-            this.dataGridViewDrawingValues.Location =
-                new System.Drawing.Point(20, 80);
-
-            this.dataGridViewDrawingValues.Name =
-                "dataGridViewDrawingValues";
-
-            this.dataGridViewDrawingValues.ReadOnly = true;
-
-            this.dataGridViewDrawingValues.RowHeadersWidth = 51;
-
-            this.dataGridViewDrawingValues.SelectionMode =
-                System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-
-            this.dataGridViewDrawingValues.Size =
-                new System.Drawing.Size(940, 400);
-
-            this.dataGridViewDrawingValues.TabIndex = 2;
-
+            dataGridViewDrawingValues.AllowUserToAddRows = false;
+            dataGridViewDrawingValues.AllowUserToDeleteRows = false;
+            dataGridViewDrawingValues.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dataGridViewDrawingValues.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dataGridViewDrawingValues.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewDrawingValues.Location = new Point(23, 107);
+            dataGridViewDrawingValues.Margin = new Padding(3, 4, 3, 4);
+            dataGridViewDrawingValues.Name = "dataGridViewDrawingValues";
+            dataGridViewDrawingValues.ReadOnly = true;
+            dataGridViewDrawingValues.RowHeadersWidth = 51;
+            dataGridViewDrawingValues.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridViewDrawingValues.Size = new Size(1074, 533);
+            dataGridViewDrawingValues.TabIndex = 2;
+            // 
+            // btnCompare
+            // 
+            btnCompare.Location = new Point(424, 27);
+            btnCompare.Margin = new Padding(3, 4, 3, 4);
+            btnCompare.Name = "btnCompare";
+            btnCompare.Size = new Size(183, 53);
+            btnCompare.TabIndex = 3;
+            btnCompare.Text = "Compare with Excel";
+            btnCompare.UseVisualStyleBackColor = true;
+            btnCompare.Click += btnCompare_Click;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions =
-                new System.Drawing.SizeF(7F, 15F);
-
-            this.AutoScaleMode =
-                System.Windows.Forms.AutoScaleMode.Font;
-
-            this.ClientSize =
-                new System.Drawing.Size(980, 510);
-
-            this.Controls.Add(this.dataGridViewDrawingValues);
-            this.Controls.Add(this.btnUpdate);
-            this.Controls.Add(this.btnOpenFile);
-
-            this.MinimumSize =
-                new System.Drawing.Size(700, 400);
-
-            this.Name = "Form1";
-            this.Text = "SolidWorks Deksloof Calculator";
-
-            this.Load +=
-                new System.EventHandler(this.Form1_Load);
-
-            ((System.ComponentModel.ISupportInitialize)
-                (this.dataGridViewDrawingValues)).EndInit();
-
-            this.ResumeLayout(false);
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(1120, 680);
+            Controls.Add(btnCompare);
+            Controls.Add(dataGridViewDrawingValues);
+            Controls.Add(btnUpdate);
+            Controls.Add(btnOpenFile);
+            Margin = new Padding(3, 4, 3, 4);
+            MinimumSize = new Size(797, 518);
+            Name = "Form1";
+            Text = "SolidWorks Deksloof Calculator";
+            Load += Form1_Load;
+            ((System.ComponentModel.ISupportInitialize)dataGridViewDrawingValues).EndInit();
+            ResumeLayout(false);
         }
 
         #endregion
@@ -117,5 +97,6 @@
         private System.Windows.Forms.Button btnOpenFile;
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.DataGridView dataGridViewDrawingValues;
+        private Button btnCompare;
     }
 }

@@ -75,7 +75,6 @@ namespace SolidworksAPITest
             }
         }
 
-    
         private List<DeksloofCalculator.Point3D> LoadCoordinatesFromFile(
             string filePath)
         {
@@ -135,7 +134,11 @@ namespace SolidworksAPITest
                         $"Value: {parts[2]}");
                 }
 
-                coordinates.Add(new DeksloofCalculator.Point3D(x * 1000, y * 1000, z * 1000));
+                coordinates.Add(
+                    new DeksloofCalculator.Point3D(
+                        x * 1000,
+                        y * 1000,
+                        z * 1000));
             }
 
             return coordinates;
@@ -159,7 +162,8 @@ namespace SolidworksAPITest
                     return;
                 }
 
-                List<DeksloofCalculator.DrawingValues> values = deksloofCalculator.CalculateAllDrawingValues();
+                List<DeksloofCalculator.DrawingValues> values =
+                    deksloofCalculator.CalculateAllDrawingValues();
 
                 dataGridViewDrawingValues.DataSource = null;
                 dataGridViewDrawingValues.DataSource = values;
@@ -177,15 +181,120 @@ namespace SolidworksAPITest
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Warning);
                 }
-
-                // solidWorker.CreateCube(100);
-                // solidWorker.ModifyDeksloof();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(
                     ex.Message,
                     "Calculation error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnCompare_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                
+                // 1. Make sure a TXT file has been loaded
+                if (deksloofCalculator == null)
+                {
+                    MessageBox.Show(
+                        "Please load a TXT coordinate file first.",
+                        "No coordinate file",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
+
+                    return;
+                }
+
+                
+                // 2. Select the reference Excel file
+                using OpenFileDialog openDialog = new OpenFileDialog();
+
+                openDialog.Filter = "Excel files (*.xlsx)|*.xlsx|" + "All files (*.*)|*.*";
+
+                openDialog.Title = "Select reference Excel file";
+
+                if (openDialog.ShowDialog() != DialogResult.OK)
+                    return;
+
+                string referenceFile = openDialog.FileName;
+
+                
+                // 3. Calculate the current values
+                List<DeksloofCalculator.DrawingValues> calculated = deksloofCalculator.CalculateAllDrawingValues();
+
+                if (calculated.Count == 0)
+                {
+                    MessageBox.Show(
+                        "There are no calculated drawing values to compare.",
+                        "No values",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
+
+                    return;
+                }
+
+                
+                // 4. Read the reference Excel
+                var reader = new ReferenceExcelReader();
+
+                List<DeksloofCalculator.DrawingValues> reference = reader.Read(referenceFile);
+
+                if (reference.Count == 0)
+                {
+                    MessageBox.Show(
+                        "No reference values were found in the Excel file.",
+                        "No reference data",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
+
+                    return;
+                }
+
+                
+                // 5. Compare calculated vs reference
+                var comparer = new DrawingValuesComparer(tolerance: 1.0);
+
+                List<DrawingComparison> comparisons = comparer.Compare(calculated, reference);
+
+                
+                // 6. Ask where to save the comparison
+                using SaveFileDialog saveDialog = new();
+
+                saveDialog.Filter = "Excel files (*.xlsx)|*.xlsx";
+
+                saveDialog.Title = "Save comparison Excel file";
+
+                saveDialog.FileName = "Comparison.xlsx";
+
+                if (saveDialog.ShowDialog() != DialogResult.OK)
+                    return;
+
+                
+                // 7. Write the comparison Excel
+                var writer = new ExcelComparisonWriter();
+
+                writer.Write(saveDialog.FileName, comparisons);
+
+                
+                // 8. Finished
+                MessageBox.Show(
+                    $"Comparison completed successfully.\n\n" +
+                    $"Reference file:\n{referenceFile}\n\n" +
+                    $"Comparison file:\n{saveDialog.FileName}",
+                    "Comparison complete",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    $"The comparison could not be completed.\n\n" +
+                    $"{ex.Message}",
+                    "Comparison error",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
@@ -204,7 +313,6 @@ namespace SolidworksAPITest
 
             dataGridViewDrawingValues.MultiSelect = false;
 
-            // Format numeric columns to whole millimetres.
             if (dataGridViewDrawingValues.Columns.Contains("A"))
                 dataGridViewDrawingValues.Columns["A"]
                     .DefaultCellStyle.Format = "F0";

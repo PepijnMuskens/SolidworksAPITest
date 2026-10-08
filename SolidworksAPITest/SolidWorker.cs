@@ -16,7 +16,11 @@ namespace SolidworksAPITest
 
         public SolidWorker()
         {
-            swApp = SolidWorksSingleton.GetApplication();
+            var swApp = SolidWorksSingleton.GetApplication();
+
+            if (swApp == null)
+                return;
+
             swModel = swApp.ActiveDoc as ModelDoc2;
         }
 
